@@ -1,4 +1,4 @@
-// Copyright 2020 [Your Name]. All rights reserved.
+// Copyright 2020 Kaahan Motwani. All rights reserved.
 
 #include <sudoku/solver.h>
 

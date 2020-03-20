@@ -1,4 +1,4 @@
-// Copyright (c) 2020 [Your Name]. All rights reserved.
+// Copyright (c) 2020 Kaahan Motwani. All rights reserved.
 
 #ifndef SUDOKU_SOLVER_H_
 #define SUDOKU_SOLVER_H_
