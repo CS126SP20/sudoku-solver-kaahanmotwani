@@ -8,5 +8,5 @@
 #endif  // SUDOKU_SUDOKU_PUZZLE_H
 
 namespace sudokupuzzle {
-  
+
 }
