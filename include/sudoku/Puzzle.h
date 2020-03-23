@@ -17,8 +17,8 @@ class Puzzle {
     friend istream& operator>>(istream& is, Puzzle puzzle);
     friend std::istream& operator<<(std::ostream& os, const Puzzle& puzzle);
 
-   private:
-     string game;
+  private:
+    string game;
 };
 
 #endif  // PUZZLE_H

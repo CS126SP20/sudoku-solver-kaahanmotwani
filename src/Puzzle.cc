@@ -3,7 +3,11 @@
 //
 
 #include "sudoku/Puzzle.h"
+
 #include <sstream>
+#include <vector>
+
+
 
 Puzzle::Puzzle() {
 
@@ -11,10 +15,22 @@ Puzzle::Puzzle() {
 Puzzle::Puzzle(const string& line) {
 
 }
+
 std::istream& operator>>(std::istream& is, Puzzle puzzle) {
   is >> puzzle.game;
+
+  std::vector<std::vector<char>> board;
+  for (size_t i = 0; i < 9; i++) {
+    std::vector<char> row;
+    for (size_t j = 0; j < 9; j++) {
+      row.push_back(puzzle.game[j + (i * 9)]);
+    }
+    board.push_back(row);
+  }
+
   return is;
 }
+
 std::istream& operator<<(std::ostream& os, const Puzzle& puzzle) {
 
 }

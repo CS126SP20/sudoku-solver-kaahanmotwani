@@ -30,27 +30,24 @@ int main(int argc, char** argv) {
       // Handle read error by throwing invalid argument exception
     }
     std::istream& input_stream = puzzle_stream;
-
-    string tag;
+    string tag; // Represents the first line in the spf file
     input_stream >> tag;
-
-
     std::cout << tag << std::endl;
 
     string line;
     if (tag == "#spf1.0") {
       while (std::getline(puzzle_stream, line)) {
+
         if (line.length() == 81 && ContainsValidCharacters(line)) {
           //std::istringstream str(line);
           cout << line << endl;
           cout << "valid" << endl;
-          Puzzle p;
+          Puzzle puzzle;
           std::istringstream input(line);
           std::istream& istream1 = input;
-          istream1 >> p;
+          istream1 >> puzzle;
         }
-//      Puzzle puzzle;
-//      line >> puzzle;  // Initialize the puzzle
+        cout << "random" << endl;
 //      std::cout << puzzle << std::endl;  // Print the solved puzzle
       }
     }
