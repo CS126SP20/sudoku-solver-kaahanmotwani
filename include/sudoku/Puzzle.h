@@ -11,8 +11,14 @@ using std::istream;
 using std::string;
 
 class Puzzle {
-  //Puzzle(string line);
-  friend istream& operator>>(istream is, Puzzle puzzle);
+  public:
+  Puzzle();
+  Puzzle(const string& line);
+    friend istream& operator>>(istream& is, Puzzle puzzle);
+    friend std::istream& operator<<(std::ostream& os, const Puzzle& puzzle);
+
+   private:
+     string game;
 };
 
 #endif  // PUZZLE_H

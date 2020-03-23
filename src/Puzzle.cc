@@ -3,12 +3,21 @@
 //
 
 #include "sudoku/Puzzle.h"
+#include <sstream>
 
-namespace {
+Puzzle::Puzzle() {
 
-  std::istream& operator>>(std::istream is, Puzzle puzzle) {
+}
+Puzzle::Puzzle(const string& line) {
 
-  }
+}
+std::istream& operator>>(std::istream& is, Puzzle puzzle) {
+  is >> puzzle.game;
+  return is;
+}
+std::istream& operator<<(std::ostream& os, const Puzzle& puzzle) {
+
+}
 //  std::istream& operator>> (std::istream& is, Date dt) {
 //    is>> dt.mo>> dt.da>> dt.yr;
 //    return is;
@@ -32,4 +41,3 @@ namespace {
 //    }
 //  }
 
-}
