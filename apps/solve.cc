@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
           std::istringstream input(line);
           //std::istream& istream1 = input;
           input >> puzzle;
+          //std::cout << puzzle;  // Print the solved puzzle
         }
         //cout << "random" << endl;
 //      std::cout << puzzle << std::endl;  // Print the solved puzzle
