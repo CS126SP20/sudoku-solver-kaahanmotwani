@@ -2,11 +2,9 @@
 
 #include <sudoku/solver.h>
 
-
-
 namespace sudoku {
 
-using std::vector;
+
 // UNASSIGNED is used for empty cells in sudoku grid
 #define UNASSIGNED 0
 
@@ -14,21 +12,6 @@ using std::vector;
 // Size will be NxN
 #define N 9
 
-// This function finds an entry in grid
-// that is still unassigned
-bool FindUnassignedLocation(int grid[N][N],
-                            int &row, int &col);
-
-// Checks whether it will be legal
-// to assign num to the given row, col
-bool isSafe(int grid[N][N], int row,
-            int col, int num);
-
-/* Takes a partially filled-in grid and attempts
-to assign values to all unassigned locations in
-such a way to meet the requirements for
-Sudoku solution (non-duplication across rows,
-columns, and boxes) */
 bool SolveSudoku(int grid[N][N])
 {
   int row, col;
@@ -42,7 +25,7 @@ bool SolveSudoku(int grid[N][N])
   for (int num = 1; num <= 9; num++)
   {
     // if looks promising
-    if (isSafe(grid, row, col, num))
+    if (IsSafe(grid, row, col, num))
     {
       // make tentative assignment
       grid[row][col] = num;
@@ -73,11 +56,7 @@ bool FindUnassignedLocation(int grid[N][N],
   return false;
 }
 
-/* Returns a boolean which indicates whether
-an assigned entry in the specified row matches
-the given number. */
-bool UsedInRow(int grid[N][N], int row, int num)
-{
+bool UsedInRow(int grid[N][N], int row, int num) {
   for (int col = 0; col < N; col++)
     if (grid[row][col] == num)
       return true;
@@ -87,8 +66,7 @@ bool UsedInRow(int grid[N][N], int row, int num)
 /* Returns a boolean which indicates whether
 an assigned entry in the specified column
 matches the given number. */
-bool UsedInCol(int grid[N][N], int col, int num)
-{
+bool UsedInCol(int grid[N][N], int col, int num) {
   for (int row = 0; row < N; row++)
     if (grid[row][col] == num)
       return true;
@@ -98,9 +76,7 @@ bool UsedInCol(int grid[N][N], int col, int num)
 /* Returns a boolean which indicates whether
 an assigned entry within the specified 3x3 box
 matches the given number. */
-bool UsedInBox(int grid[N][N], int boxStartRow,
-               int boxStartCol, int num)
-{
+bool UsedInBox(int grid[N][N], int boxStartRow, int boxStartCol, int num) {
   for (int row = 0; row < 3; row++)
     for (int col = 0; col < 3; col++)
       if (grid[row + boxStartRow]
@@ -112,9 +88,7 @@ bool UsedInBox(int grid[N][N], int boxStartRow,
 /* Returns a boolean which indicates whether
 it will be legal to assign num to the given
 row, col location. */
-bool isSafe(int grid[N][N], int row,
-            int col, int num)
-{
+bool IsSafe(int grid[N][N], int row, int col, int num) {
   /* Check if 'num' is not already placed in
   current row, current column and current 3x3 box */
   return !UsedInRow(grid, row, num) &&

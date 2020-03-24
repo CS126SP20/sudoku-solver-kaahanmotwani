@@ -5,10 +5,6 @@
 #include "sudoku/Puzzle.h"
 #include "sudoku/solver.h"
 
-
-/**
- * Creates an empty constructor for a Puzzle object.
- */
 Puzzle::Puzzle() = default;
 int board[9][9];
 std::istream& operator>>(std::istream& is, Puzzle puzzle) {

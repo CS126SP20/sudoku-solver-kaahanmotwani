@@ -14,11 +14,29 @@ using std::string;
 
 class Puzzle {
   public:
-  Puzzle();
-   friend istream& operator>>(istream& is, Puzzle puzzle);
+    /**
+    * Creates an empty constructor for a Puzzle object.
+    */
+    Puzzle();
+    /**
+     *
+     * @param is
+     * @param puzzle
+     * @return
+     */
+    friend istream& operator>>(istream& is, Puzzle puzzle);
+    /**
+     *
+     * @param os
+     * @param puzzle
+     * @return
+     */
     friend std::ostream& operator<<(std::ostream& os, const Puzzle& puzzle);
 
   private:
+    /**
+     * efw
+     */
     string game;
 };
 
