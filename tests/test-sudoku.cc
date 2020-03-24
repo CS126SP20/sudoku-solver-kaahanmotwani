@@ -8,10 +8,16 @@
 
 using utils::ReturnTag;
 using utils::PrintSolvedPuzzle;
+using utils::ContainsValidCharacters;
 
 TEST_CASE("Wrong tag", "[faulty-file]") {
   std::ifstream puzzle_stream("data/faulty_tag.spf");
   REQUIRE(ReturnTag(puzzle_stream) == "#spf2.0");
+}
+
+TEST_CASE("Empty tag", "[faulty-file]") {
+  std::ifstream puzzle_stream("data/empty.spf");
+  REQUIRE(ReturnTag(puzzle_stream).empty());
 }
 
 /**
@@ -38,6 +44,13 @@ TEST_CASE("Too few characters", "[faulty-puzzle]") {
                "2__5__1____248__";
   REQUIRE(PrintSolvedPuzzle(puz).empty());
 }
+
+TEST_CASE("Unexpected characters", "[faulty-puzzle]") {
+  string puz = "___8_5____k__6___7_9___38___4795_3______71_9____"
+               "2__5__1____248__";
+  REQUIRE(!ContainsValidCharacters(puz));
+}
+
 
 
 // /Users/kaahanmotwani/CLionProjects/sudoku-kaahanmotwani/tests/data/simple2.spf
