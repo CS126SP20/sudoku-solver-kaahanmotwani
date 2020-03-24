@@ -20,6 +20,12 @@ using std::endl;
  */
 bool ContainsValidCharacters(const string& puzzle_line);
 
+/**
+ *
+ * @param puzzle_stream
+ */
+void PrintSolvedPuzzle(std::ifstream & puzzle_stream);
+
 int main(int argc, char** argv) {
   if (argc > 1) {
     std::ifstream puzzle_stream(argv[1]);
@@ -32,20 +38,14 @@ int main(int argc, char** argv) {
     std::istream& input_stream = puzzle_stream;
     string tag; // Represents the first line in the spf file as a string
     input_stream >> tag; // Puts the contents of the first line into tag
-    string puzzle_line; // Represents a line that is a puzzle from the spf file
+    string puzzle_line;
     const int kPuzzleLength = 81;
     if (tag == "#spf1.0") {
-      while (std::getline(puzzle_stream, puzzle_line)) {
-        if (puzzle_line.length() == kPuzzleLength
-          && ContainsValidCharacters(puzzle_line)) {
-          cout << puzzle_line << endl;
-          //cout << "valid" << endl;
-          Puzzle puzzle;
-          std::istringstream input(puzzle_line);
-          input >> puzzle;
-          cout << puzzle << endl;
-        }
-      }
+      PrintSolvedPuzzle(puzzle_stream);
+    } else {
+      cout << "This is not an #spf1.0 file!" << endl;
+      exit(0);
+      //incorrect file type
     }
   } else {
     cout << "You need to provide a Sudoku file through command line "
@@ -75,6 +75,23 @@ bool ContainsValidCharacters(const string& puzzle_line) {
     }
   }
   return true;
+}
+
+void PrintSolvedPuzzle(std::ifstream & puzzle_stream) {
+  string puzzle_line; // Represents a line that is a puzzle from the spf file
+  const int kPuzzleLength = 81;
+  while (std::getline(puzzle_stream, puzzle_line)) {
+    if (puzzle_line.length() == kPuzzleLength
+        && ContainsValidCharacters(puzzle_line)) {
+      cout << puzzle_line << endl;
+      Puzzle puzzle;
+      std::istringstream input(puzzle_line);
+      // The following two lines use overloaded operators (>> and <<) to
+      // initialize and print the solved puzzle
+      input >> puzzle;
+      cout << puzzle << endl;
+    }
+  }
 }
 
 
