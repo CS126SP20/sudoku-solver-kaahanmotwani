@@ -64,7 +64,6 @@ namespace utils {
       }
     } else {
       cout << "This is not an #spf1.0 file!" << endl;
-      exit(0);
     }
     return tag;
   }
