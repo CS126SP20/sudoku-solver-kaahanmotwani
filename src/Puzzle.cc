@@ -10,6 +10,7 @@ using std::istream;
 
 Puzzle::Puzzle() = default;
 int board[9][9];
+string solved_puzzle;
 
 istream &operator>>(istream& is, Puzzle puzzle) {
   is >> puzzle.game;
@@ -34,11 +35,12 @@ istream &operator>>(istream& is, Puzzle puzzle) {
   }
 
   if (sudoku::SolveSudoku(board)) {
-    sudoku::PrintGrid(board);
+    //sudoku::PrintGrid(board);
     puzzle.game.clear();
     for (auto & row : board) {
       for (int col : row) {
-        puzzle.game += '0' + static_cast<char>(col);
+        puzzle.game += '0' + static_cast<char>(col); // Adds ints to puzzle.game
+        solved_puzzle = puzzle.game;
       }
     }
     //std::cout << puzzle.game << std::endl;
@@ -50,7 +52,7 @@ istream &operator>>(istream& is, Puzzle puzzle) {
 }
 
 ostream &operator<<(ostream& os, const Puzzle& puzzle) {
-  os << puzzle.game;
+  os << solved_puzzle;
   return os;
 }
 

@@ -39,11 +39,11 @@ int main(int argc, char** argv) {
         if (puzzle_line.length() == kPuzzleLength
           && ContainsValidCharacters(puzzle_line)) {
           cout << puzzle_line << endl;
-          cout << "valid" << endl;
+          //cout << "valid" << endl;
           Puzzle puzzle;
           std::istringstream input(puzzle_line);
           input >> puzzle;
-          cout << puzzle;  // Print the solved puzzle
+          cout << puzzle << endl;
         }
       }
     }

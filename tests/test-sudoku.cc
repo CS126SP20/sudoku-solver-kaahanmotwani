@@ -5,7 +5,6 @@
 #include <catch2/catch.hpp>
 #include <sudoku/solver.h>
 
-
 // TODO(you): Remove this unnecessary test case.
 TEST_CASE("Sanity Check", "[addition]") {
   REQUIRE(1 + 1 == 2);

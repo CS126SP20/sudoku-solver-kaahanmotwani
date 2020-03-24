@@ -34,6 +34,8 @@ class Puzzle {
      */
     friend std::ostream &operator<<(std::ostream& os, const Puzzle& puzzle);
 
+    string solved_puzzle;
+
   private:
     /**
      * efw
