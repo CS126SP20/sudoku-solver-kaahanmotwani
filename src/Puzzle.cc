@@ -5,9 +5,13 @@
 #include "sudoku/Puzzle.h"
 #include "sudoku/solver.h"
 
+using std::ostream;
+using std::istream;
+
 Puzzle::Puzzle() = default;
 int board[9][9];
-std::istream &operator>>(std::istream& is, Puzzle puzzle) {
+
+istream &operator>>(istream& is, Puzzle puzzle) {
   is >> puzzle.game;
   // Loops through puzzle string and replaces all '_' with '0' chars so that the
   // board is all integers for solver.cc's implementation of solving puzzles.
@@ -20,17 +24,24 @@ std::istream &operator>>(std::istream& is, Puzzle puzzle) {
   // This nested for loop loops through the 81 character string and creates
   // a 9x9 board of integers to store the puzzle
   const int kSqrtBoardSize = 9;
-  for (size_t i = 0; i < kSqrtBoardSize; i++) {
-    for (size_t j = 0; j < kSqrtBoardSize; j++) {
-      board[i][j] = (int) (puzzle.game[j + (i * kSqrtBoardSize)]);
+  for (size_t row = 0; row < kSqrtBoardSize; row++) {
+    for (size_t col = 0; col < kSqrtBoardSize; col++) {
+      board[row][col] = (int) (puzzle.game[col + (row * kSqrtBoardSize)]);
       // The following line subtracts '0' in order to get the correct digit
       // based on character encodings.
-      board[i][j] -= '0';
+      board[row][col] -= '0';
     }
   }
 
   if (sudoku::SolveSudoku(board)) {
     sudoku::PrintGrid(board);
+    puzzle.game.clear();
+    for (auto & row : board) {
+      for (int col : row) {
+        puzzle.game += '0' + static_cast<char>(col);
+      }
+    }
+    //std::cout << puzzle.game << std::endl;
   } else {
     std::istringstream unsolvable("Unsolvable");
     //return unsolvable;
@@ -38,8 +49,8 @@ std::istream &operator>>(std::istream& is, Puzzle puzzle) {
   return is;
 }
 
-std::ostream &operator<<(std::ostream& os, const Puzzle& puzzle) {
-  //std::cout << board << std::endl;
+ostream &operator<<(ostream& os, const Puzzle& puzzle) {
+  os << puzzle.game;
   return os;
 }
 

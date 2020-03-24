@@ -95,12 +95,11 @@ bool IsSafe(int grid[N][N], int row, int col, int num) {
 }
 
 /* A utility function to print grid */
-void PrintGrid(int grid[N][N])
-{
-  for (int row = 0; row < N; row++)
-  {
-    for (int col = 0; col < N; col++)
+void PrintGrid(int grid[N][N]) {
+  for (int row = 0; row < N; row++) {
+    for (int col = 0; col < N; col++) {
       std::cout << grid[row][col] << " ";
+    }
     std::cout << std::endl;
   }
 }

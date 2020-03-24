@@ -15,7 +15,7 @@ using std::endl;
 
 /**
  *
- * @param line
+ * @param puzzle_line
  * @return
  */
 bool ContainsValidCharacters(const string& puzzle_line);
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
           Puzzle puzzle;
           std::istringstream input(puzzle_line);
           input >> puzzle;
-          //std::cout << puzzle;  // Print the solved puzzle
+          cout << puzzle;  // Print the solved puzzle
         }
       }
     }

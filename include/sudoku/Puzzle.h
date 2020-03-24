@@ -24,7 +24,8 @@ class Puzzle {
      * @param puzzle
      * @return
      */
-    friend istream &operator>>(istream& is, Puzzle puzzle);
+    friend std::istream &operator>>(istream& is, Puzzle puzzle);
+
     /**
      *
      * @param os
