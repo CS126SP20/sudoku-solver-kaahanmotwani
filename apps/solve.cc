@@ -18,7 +18,7 @@ using std::endl;
  * @param line
  * @return
  */
-bool ContainsValidCharacters(const string& line);
+bool ContainsValidCharacters(const string& puzzle_line);
 
 int main(int argc, char** argv) {
   if (argc > 1) {
@@ -26,25 +26,22 @@ int main(int argc, char** argv) {
 
     if (puzzle_stream.fail()) {
       throw std::invalid_argument("The file could not open!");
-      // Handle read error by throwing invalid argument exception
+      // Handle read error
     }
 
     std::istream& input_stream = puzzle_stream;
-    string tag; // Represents the first line in the spf file
-    input_stream >> tag;
-    std::cout << tag << std::endl;
-
-    string line;
+    string tag; // Represents the first line in the spf file as a string
+    input_stream >> tag; // Puts the contents of the first line into tag
+    string puzzle_line; // Represents a line that is a puzzle from the spf file
+    const int kPuzzleLength = 81;
     if (tag == "#spf1.0") {
-      while (std::getline(puzzle_stream, line)) {
-
-        if (line.length() == 81 && ContainsValidCharacters(line)) {
-          //std::istringstream str(line);
-          cout << line << endl;
+      while (std::getline(puzzle_stream, puzzle_line)) {
+        if (puzzle_line.length() == kPuzzleLength
+          && ContainsValidCharacters(puzzle_line)) {
+          cout << puzzle_line << endl;
           cout << "valid" << endl;
           Puzzle puzzle;
-          std::istringstream input(line);
-          //std::istream& istream1 = input;
+          std::istringstream input(puzzle_line);
           input >> puzzle;
           //std::cout << puzzle;  // Print the solved puzzle
         }
@@ -59,16 +56,18 @@ int main(int argc, char** argv) {
   return 0;
 }
 
-bool ContainsValidCharacters(const string& line) {
-  // a string of valid digits in a sudoku puzzle
+bool ContainsValidCharacters(const string& puzzle_line) {
+  // digits_string is a string of valid digits in a sudoku puzzle
   string digits_string = "123456789";
-  std::vector<char> digits;
-  for (char digit : digits_string) { // for each char in digits_string
+  vector<char> digits;
+  // Adds all digits to a vector of chars
+  for (char digit : digits_string) {
     digits.push_back(digit);
   }
 
-  //iterating through the given sudoku puzzle
-  for (char c : line) {
+  // Iterating through the given Sudoku puzzle and ensuring that the only
+  // characters in the puzzle are digits 1 - 9 and '_'
+  for (char c : puzzle_line) {
     bool do_chars_exist = std::find(digits.begin(), digits.end(), c)
         != digits.end();
     if (c != '_' && !(do_chars_exist)) {
