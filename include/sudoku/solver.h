@@ -10,8 +10,8 @@
 namespace sudoku {
   #define N 9
 
-  bool SolveSudoku(std::vector<std::vector<char>> board);
-  void printGrid(std::vector<std::vector<char>> board);
+  bool SolveSudoku(int grid[N][N]);
+  void printGrid(int grid[N][N]);
 }  // namespace sudoku
 
 #endif  // SUDOKU_SOLVER_H_

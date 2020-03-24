@@ -45,10 +45,10 @@ int main(int argc, char** argv) {
           cout << "valid" << endl;
           Puzzle puzzle;
           std::istringstream input(line);
-          std::istream& istream1 = input;
-          istream1 >> puzzle;
+          //std::istream& istream1 = input;
+          input >> puzzle;
         }
-        cout << "random" << endl;
+        //cout << "random" << endl;
 //      std::cout << puzzle << std::endl;  // Print the solved puzzle
       }
     }

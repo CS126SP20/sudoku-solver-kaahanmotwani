@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include <vector>
+#include <string>
 
 
 
@@ -19,16 +20,25 @@ Puzzle::Puzzle(const string& line) {
 
 std::istream& operator>>(std::istream& is, Puzzle puzzle) {
   is >> puzzle.game;
-
-  std::vector<std::vector<char>> board;
-  for (size_t i = 0; i < 9; i++) {
-    std::vector<char> row;
-    for (size_t j = 0; j < 9; j++) {
-      row.push_back(puzzle.game[j + (i * 9)]);
+  std::cout << puzzle.game << std::endl;
+  for (size_t i = 0; i < puzzle.game.length(); i++) {
+    if (puzzle.game[i] == '_') {
+      puzzle.game[i] = '0';
     }
-    board.push_back(row);
   }
+  int board[9][9];
+  for (size_t i = 0; i < 9; i++) {
+    //std::vector<char> row;
+    for (size_t j = 0; j < 9; j++) {
+      board[i][j] = (int)(puzzle.game[j + (i * 9)]);
+      board[i][j] -= '0';
 
+      //row.push_back(puzzle.game[j + (i * 9)]);
+    }
+    //board.push_back(row);
+  }
+  std::cout << board[0][0] << std::endl;
+  std::cout << puzzle.game[0] << std::endl;
   if (sudoku::SolveSudoku(board)) {
     sudoku::printGrid(board);
   } else {
