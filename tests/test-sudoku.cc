@@ -8,7 +8,7 @@
 // TODO(you): Remove this unnecessary test case.
 TEST_CASE("Sanity Check", "[addition]") {
   std::ifstream puzzle_stream("tests/data/blank_lines.spf");
-  REQUIRE();
+  //REQUIRE();
 }
 
 
