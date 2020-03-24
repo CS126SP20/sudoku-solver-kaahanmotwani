@@ -56,6 +56,7 @@ namespace utils {
     std::istream& input_stream = puzzle_stream;
     string tag;           // Represents the first line in the spf file as a string
     input_stream >> tag;  // Puts the contents of the first line into tag
+    cout << tag << endl;
     if (tag == "#spf1.0") {
       string puzzle_line;
       while (std::getline(puzzle_stream, puzzle_line)) {
