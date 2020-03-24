@@ -12,8 +12,7 @@ namespace sudoku {
 // Size will be NxN
 #define N 9
 
-bool SolveSudoku(int grid[N][N])
-{
+bool SolveSudoku(int grid[N][N]) {
   int row, col;
 
   // If there is no unassigned location,
@@ -63,9 +62,6 @@ bool UsedInRow(int grid[N][N], int row, int num) {
   return false;
 }
 
-/* Returns a boolean which indicates whether
-an assigned entry in the specified column
-matches the given number. */
 bool UsedInCol(int grid[N][N], int col, int num) {
   for (int row = 0; row < N; row++)
     if (grid[row][col] == num)
@@ -99,7 +95,7 @@ bool IsSafe(int grid[N][N], int row, int col, int num) {
 }
 
 /* A utility function to print grid */
-void printGrid(int grid[N][N])
+void PrintGrid(int grid[N][N])
 {
   for (int row = 0; row < N; row++)
   {

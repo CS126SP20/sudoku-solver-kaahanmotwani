@@ -37,7 +37,9 @@ namespace sudoku {
   /**
    * Takes a partially filled-in grid and attempts to assign values to all
    * unassigned locations in such a way to meet the requirements for Sudoku
-   * solution (non-duplication across rows, columns, and boxes)
+   * solution (non-duplication across rows, columns, and boxes).
+   * Algorithm for solving Sudoku puzzle below derived from:
+   * https://www.geeksforgeeks.org/sudoku-backtracking-7/
    *
    * @param grid
    * @return
@@ -56,7 +58,8 @@ namespace sudoku {
   bool UsedInRow(int grid[N][N], int row, int num);
 
   /**
-   *
+   * Returns a boolean which indicates whether an assigned entry in the
+   * specified column matches the given number.
    * @param grid
    * @param col
    * @param num
@@ -74,7 +77,7 @@ namespace sudoku {
    */
   bool UsedInBox(int grid[N][N], int boxStartRow, int boxStartCol, int num);
 
-  void printGrid(int grid[N][N]);
+  void PrintGrid(int grid[N][N]);
 }  // namespace sudoku
 
 #endif  // SUDOKU_SOLVER_H_

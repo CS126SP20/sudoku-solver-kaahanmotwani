@@ -24,14 +24,14 @@ class Puzzle {
      * @param puzzle
      * @return
      */
-    friend istream& operator>>(istream& is, Puzzle puzzle);
+    friend istream &operator>>(istream& is, Puzzle puzzle);
     /**
      *
      * @param os
      * @param puzzle
      * @return
      */
-    friend std::ostream& operator<<(std::ostream& os, const Puzzle& puzzle);
+    friend std::ostream &operator<<(std::ostream& os, const Puzzle& puzzle);
 
   private:
     /**

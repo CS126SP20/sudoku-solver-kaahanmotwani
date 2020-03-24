@@ -5,7 +5,6 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
-//#include <istringstream>
 #include <sstream>
 #include <vector>
 
@@ -19,7 +18,7 @@ using std::endl;
  * @param line
  * @return
  */
-bool ContainsValidCharacters(string line);
+bool ContainsValidCharacters(const string& line);
 
 int main(int argc, char** argv) {
   if (argc > 1) {
@@ -49,24 +48,8 @@ int main(int argc, char** argv) {
           input >> puzzle;
           //std::cout << puzzle;  // Print the solved puzzle
         }
-        //cout << "random" << endl;
-//      std::cout << puzzle << std::endl;  // Print the solved puzzle
       }
     }
-
-
-
-
-//    string line;
-//    while (std::getline(puzzle_stream, line))
-//    {
-//      std::istringstream iss(line);
-//      int a, b;
-//      if (!(iss >> a >> b)) { break; } // error
-//
-//      // process pair (a,b)
-//    }
-
   } else {
     cout << "You need to provide a Sudoku file through command line "
                  "arguments!" << endl;
@@ -76,7 +59,7 @@ int main(int argc, char** argv) {
   return 0;
 }
 
-bool ContainsValidCharacters(string line) {
+bool ContainsValidCharacters(const string& line) {
   // a string of valid digits in a sudoku puzzle
   string digits_string = "123456789";
   std::vector<char> digits;
@@ -85,7 +68,7 @@ bool ContainsValidCharacters(string line) {
   }
 
   //iterating through the given sudoku puzzle
-  for (char& c : line) {
+  for (char c : line) {
     bool do_chars_exist = std::find(digits.begin(), digits.end(), c)
         != digits.end();
     if (c != '_' && !(do_chars_exist)) {
