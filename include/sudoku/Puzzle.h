@@ -6,6 +6,8 @@
 #define PUZZLE_H
 
 #include <istream>
+#include <sstream>
+#include <string>
 
 using std::istream;
 using std::string;
@@ -13,9 +15,8 @@ using std::string;
 class Puzzle {
   public:
   Puzzle();
-  Puzzle(const string& line);
-    friend istream& operator>>(istream& is, Puzzle puzzle);
-    friend std::istream& operator<<(std::ostream& os, const Puzzle& puzzle);
+   friend istream& operator>>(istream& is, Puzzle puzzle);
+    friend std::ostream& operator<<(std::ostream& os, const Puzzle& puzzle);
 
   private:
     string game;

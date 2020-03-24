@@ -5,39 +5,32 @@
 #include "sudoku/Puzzle.h"
 #include "sudoku/solver.h"
 
-#include <sstream>
-#include <vector>
-#include <string>
 
-
-
-Puzzle::Puzzle() {
-
-}
-Puzzle::Puzzle(const string& line) {
-
-}
+/**
+ * Creates an empty constructor for a Puzzle object.
+ */
+Puzzle::Puzzle() = default;
 int board[9][9];
 std::istream& operator>>(std::istream& is, Puzzle puzzle) {
   is >> puzzle.game;
-  std::cout << puzzle.game << std::endl;
-  for (size_t i = 0; i < puzzle.game.length(); i++) {
-    if (puzzle.game[i] == '_') {
-      puzzle.game[i] = '0';
+  // Loops through puzzle string and replaces all '_' with '0' chars so that board is all integers for solver.cc
+  for (char & i : puzzle.game) {
+    if (i == '_') {
+      i = '0';
     }
   }
+
+  // This nested for loop loops through the
   const int kSqrtBoardSize = 9;
   for (size_t i = 0; i < kSqrtBoardSize; i++) {
     for (size_t j = 0; j < kSqrtBoardSize; j++) {
-      board[i][j] = (int)(puzzle.game[j + (i * 9)]);
+      board[i][j] = (int)(puzzle.game[j + (i * kSqrtBoardSize)]);
       board[i][j] -= '0';
     }
   }
-//  std::cout << board[0][0] << std::endl;
-//  std::cout << puzzle.game[0] << std::endl;
+
   if (sudoku::SolveSudoku(board)) {
     sudoku::printGrid(board);
-    //board >> puzzle;
   } else {
     std::istringstream unsolvable("Unsolvable");
     //return unsolvable;
@@ -45,8 +38,8 @@ std::istream& operator>>(std::istream& is, Puzzle puzzle) {
   return is;
 }
 
-std::istream& operator<<(std::ostream& os, const Puzzle& puzzle) {
-
+std::ostream& operator<<(std::ostream& os, const Puzzle& puzzle) {
+  return os;
 }
 
 
