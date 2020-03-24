@@ -3,6 +3,7 @@
 //
 
 #include "sudoku/Puzzle.h"
+#include "sudoku/solver.h"
 
 #include <sstream>
 #include <vector>
@@ -28,6 +29,12 @@ std::istream& operator>>(std::istream& is, Puzzle puzzle) {
     board.push_back(row);
   }
 
+  if (sudoku::SolveSudoku(board)) {
+    sudoku::printGrid(board);
+  } else {
+    std::istringstream unsolvable("Unsolvable");
+    //return unsolvable;
+  }
   return is;
 }
 

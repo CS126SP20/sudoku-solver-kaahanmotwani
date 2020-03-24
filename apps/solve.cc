@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
       throw std::invalid_argument("The file could not open!");
       // Handle read error by throwing invalid argument exception
     }
+
     std::istream& input_stream = puzzle_stream;
     string tag; // Represents the first line in the spf file
     input_stream >> tag;
