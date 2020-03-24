@@ -1,4 +1,4 @@
-add_executable(solve solve.cc)
+add_executable(solve solve.cc ../include/sudoku/solve.h)
 target_compile_features(solve PRIVATE cxx_std_17)
 target_link_libraries(solve PRIVATE sudoku)
 

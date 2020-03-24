@@ -11,6 +11,7 @@
 
 using std::istream;
 using std::string;
+using std::ostream;
 
 class Puzzle {
   public:
@@ -34,6 +35,9 @@ class Puzzle {
      */
     friend std::ostream &operator<<(std::ostream& os, const Puzzle& puzzle);
 
+    /**
+     *
+     */
     string solved_puzzle;
 
   private:

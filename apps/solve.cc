@@ -23,8 +23,16 @@ bool ContainsValidCharacters(const string& puzzle_line);
 /**
  *
  * @param puzzle_stream
+ * @return
  */
-void PrintSolvedPuzzle(std::ifstream & puzzle_stream);
+string PrintSolvedPuzzle(const string& puzzle_line);
+
+/**
+ *
+ * @param puzzle_stream
+ * @return
+ */
+string ReturnTag(std::ifstream& puzzle_stream);
 
 int main(int argc, char** argv) {
   if (argc > 1) {
@@ -34,22 +42,24 @@ int main(int argc, char** argv) {
       throw std::invalid_argument("The file could not open!");
       // Handle read error
     }
-
-    std::istream& input_stream = puzzle_stream;
-    string tag; // Represents the first line in the spf file as a string
-    input_stream >> tag; // Puts the contents of the first line into tag
-    string puzzle_line;
-    const int kPuzzleLength = 81;
-    if (tag == "#spf1.0") {
-      PrintSolvedPuzzle(puzzle_stream);
-    } else {
-      cout << "This is not an #spf1.0 file!" << endl;
-      exit(0);
-      //incorrect file type
-    }
+    ReturnTag(puzzle_stream);
+    //    std::istream& input_stream = puzzle_stream;
+    //    string tag; // Represents the first line in the spf file as a string
+    //    input_stream >> tag; // Puts the contents of the first line into tag
+    //    if (tag == "#spf1.0") {
+    //
+    //      string puzzle_line;
+    //      while (std::getline(puzzle_stream, puzzle_line)) {
+    //        cout << PrintSolvedPuzzle(puzzle_stream, puzzle_line) << endl;
+    //      }
+    //    } else {
+    //      cout << "This is not an #spf1.0 file!" << endl;
+    //      exit(0);
+    //    }
   } else {
     cout << "You need to provide a Sudoku file through command line "
-                 "arguments!" << endl;
+            "arguments!"
+         << endl;
     exit(0);
   }
 
@@ -68,8 +78,8 @@ bool ContainsValidCharacters(const string& puzzle_line) {
   // Iterating through the given Sudoku puzzle and ensuring that the only
   // characters in the puzzle are digits 1 - 9 and '_'
   for (char c : puzzle_line) {
-    bool do_chars_exist = std::find(digits.begin(), digits.end(), c)
-        != digits.end();
+    bool do_chars_exist =
+        std::find(digits.begin(), digits.end(), c) != digits.end();
     if (c != '_' && !(do_chars_exist)) {
       return false;
     }
@@ -77,22 +87,46 @@ bool ContainsValidCharacters(const string& puzzle_line) {
   return true;
 }
 
-void PrintSolvedPuzzle(std::ifstream & puzzle_stream) {
-  string puzzle_line; // Represents a line that is a puzzle from the spf file
+string PrintSolvedPuzzle(const string& puzzle_line) {
+  // string puzzle_line; // Represents a line that is a puzzle from the spf file
   const int kPuzzleLength = 81;
-  while (std::getline(puzzle_stream, puzzle_line)) {
-    if (puzzle_line.length() == kPuzzleLength
-        && ContainsValidCharacters(puzzle_line)) {
-      cout << puzzle_line << endl;
-      Puzzle puzzle;
-      std::istringstream input(puzzle_line);
-      // The following two lines use overloaded operators (>> and <<) to
-      // initialize and print the solved puzzle
-      input >> puzzle;
-      cout << puzzle << endl;
-    }
+
+  // while (std::getline(puzzle_stream, puzzle_line)) {
+
+  if (puzzle_line.length() == kPuzzleLength &&
+      ContainsValidCharacters(puzzle_line)) {
+    cout << puzzle_line << endl;  // prints unsolved puzzle
+    Puzzle puzzle;
+    std::istringstream input(puzzle_line);
+    // The following two lines use overloaded operators (>> and <<) to
+    // initialize and print the solved puzzle
+    input >> puzzle;
+    // cout << puzzle << endl;
+
+    std::ostringstream returnString;
+    returnString << puzzle;
+     return returnString.str();
   }
+  //}
+  return std::string();
 }
+
+string ReturnTag(std::ifstream& puzzle_stream) {
+  std::istream& input_stream = puzzle_stream;
+  string tag;           // Represents the first line in the spf file as a string
+  input_stream >> tag;  // Puts the contents of the first line into tag
+  if (tag == "#spf1.0") {
+    string puzzle_line;
+    while (std::getline(puzzle_stream, puzzle_line)) {
+      cout << PrintSolvedPuzzle(puzzle_line) << endl;
+    }
+  } else {
+    cout << "This is not an #spf1.0 file!" << endl;
+    exit(0);
+  }
+  return tag;
+}
+
 
 
 

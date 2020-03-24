@@ -5,12 +5,10 @@
 #include "sudoku/Puzzle.h"
 #include "sudoku/solver.h"
 
-using std::ostream;
-using std::istream;
-
-Puzzle::Puzzle() = default;
 int board[9][9];
 string solved_puzzle;
+
+Puzzle::Puzzle() = default;
 
 istream &operator>>(istream& is, Puzzle puzzle) {
   is >> puzzle.game;
