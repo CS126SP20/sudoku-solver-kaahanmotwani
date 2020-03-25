@@ -50,7 +50,6 @@ istream &operator>>(istream& is, Puzzle puzzle) {
 }
 
 ostream &operator<<(ostream& os, const Puzzle& puzzle) {
-  solved_puzzle = puzzle.game;
   os << solved_puzzle;
   return os;
 }
