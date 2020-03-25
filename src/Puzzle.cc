@@ -5,12 +5,12 @@
 #include "sudoku/Puzzle.h"
 #include "sudoku/solver.h"
 
-int board[9][9];
 string solved_puzzle;
 
 Puzzle::Puzzle() = default;
 
 istream &operator>>(istream& is, Puzzle puzzle) {
+  int board[9][9];
   is >> puzzle.game;
   // Loops through puzzle string and replaces all '_' with '0' chars so that the
   // board is all integers for solver.cc's implementation of solving puzzles.
@@ -33,23 +33,24 @@ istream &operator>>(istream& is, Puzzle puzzle) {
   }
 
   if (sudoku::SolveSudoku(board)) {
-    //sudoku::PrintGrid(board);
     puzzle.game.clear();
     for (auto & row : board) {
       for (int col : row) {
-        puzzle.game += '0' + static_cast<char>(col); // Adds ints to puzzle.game
+        // This line adds ints to puzzle.game and adds '0' to a casted char
+        // to get the correct digit based onc character encodings
+        puzzle.game += '0' + static_cast<char>(col);
         solved_puzzle = puzzle.game;
       }
     }
-    //std::cout << puzzle.game << std::endl;
   } else {
     std::istringstream unsolvable("Unsolvable");
-    //return unsolvable;
+    return unsolvable;
   }
   return is;
 }
 
 ostream &operator<<(ostream& os, const Puzzle& puzzle) {
+  solved_puzzle = puzzle.game;
   os << solved_puzzle;
   return os;
 }

@@ -51,6 +51,12 @@ TEST_CASE("Unexpected characters", "[faulty-puzzle]") {
   REQUIRE(!ContainsValidCharacters(puz));
 }
 
+TEST_CASE("Expected characters", "[puzzle]") {
+  string puz = "___8_5____3__6___7_9___38___4795_3______71_9____"
+               "2__5__1____248__";
+  REQUIRE(ContainsValidCharacters(puz));
+}
+
 
 
 // /Users/kaahanmotwani/CLionProjects/sudoku-kaahanmotwani/tests/data/simple2.spf

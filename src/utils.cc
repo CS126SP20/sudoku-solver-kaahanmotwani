@@ -5,7 +5,6 @@
 #include "sudoku/utils.h"
 #include <sudoku/Puzzle.h>
 
-
 namespace utils {
   bool ContainsValidCharacters(const string& puzzle_line) {
     // digits_string is a string of valid digits in a sudoku puzzle
@@ -28,12 +27,8 @@ namespace utils {
     return true;
   }
 
-  string PrintSolvedPuzzle(const string& puzzle_line) {
-    // string puzzle_line; // Represents a line that is a puzzle from the spf file
+  string ReturnAndPrintSolvedPuzzle(const string& puzzle_line) {
     const int kPuzzleLength = 81;
-
-    // while (std::getline(puzzle_stream, puzzle_line)) {
-
     if (puzzle_line.length() == kPuzzleLength &&
         ContainsValidCharacters(puzzle_line)) {
       cout << puzzle_line << endl;  // prints unsolved puzzle
@@ -42,25 +37,24 @@ namespace utils {
       // The following two lines use overloaded operators (>> and <<) to
       // initialize and print the solved puzzle
       input >> puzzle;
-      // cout << puzzle << endl;
-
       std::ostringstream returnString;
-      returnString << puzzle;
+      returnString << puzzle << endl;
       return returnString.str();
     }
-    //}
+
     return std::string();
   }
 
   string ReturnTag(std::ifstream& puzzle_stream) {
     std::istream& input_stream = puzzle_stream;
-    string tag;           // Represents the first line in the spf file as a string
-    input_stream >> tag;  // Puts the contents of the first line into tag
-    cout << tag << endl;
+    string tag;// Represents the first line in the spf file as a string
+    input_stream >> tag;// Puts the contents of the first line into tag
     if (tag == "#spf1.0") {
       string puzzle_line;
+      // The following while loop takes each puzzle line and calls
+      // ReturnAndPrintSolvedPuzzle
       while (std::getline(puzzle_stream, puzzle_line)) {
-        cout << PrintSolvedPuzzle(puzzle_line) << endl;
+        cout << ReturnAndPrintSolvedPuzzle(puzzle_line) << endl;
       }
     } else {
       cout << "This is not an #spf1.0 file!" << endl;
